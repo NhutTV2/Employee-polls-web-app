@@ -1,13 +1,239 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.login-img {
+    width: 40%;
+}
+
+.input {
+    width: 600px;
+    font-size: 14px;
+    padding: 6px;
+    border-radius: 8px;
+}
+
+.btn-submit {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.btn-submit:hover,
+.btn-submit:active {
+    background-color: thistle;
+}
+
+.btn-submit:disabled {
+    background-color: inherit;
+    cursor: inherit;
+}
+
+.error-message {
+    margin-top: 15px;
+    color: red;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 830px;
+    gap: 10px;
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius: 0 0 5px 5px;
+}
+
+.poll-header {
+    width: 850px;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    border: 1px solid gray;
+    border-bottom: none;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 5px 5px 0 0;
+}
+
+.poll-item {
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.poll-item-container {
+    text-align: center;
+}
+
+.username-para {
+    font-weight: 600;
+    margin: 0;
+}
+
+.time-para {
+    color: gray;
+    margin: 0;
+}
+
+.btn-show {
+    width: 100%;
+    padding: 10px 0;
+    background-color: white;
+    color: green;
+    border: 0.7px solid green;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-show:active,
+.btn-show:hover {
+    background-color: green;
+    color: white
+}
+
+.avatar {
+    width: 25%;
+    border-radius: 50%;
+}
+
+.questions-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 800px;
+}
+
+.question-content {
+    border: 0.5px solid black;
+    padding: 10px 0;
+    text-align: center;
+    border-radius: 5px 5px 0 0;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.btn-vote {
+    margin-left: 10px;
+    margin-right: 10px;
+    border: none;
+    width: 400px;
+    padding: 10px 0;
+    background-color: green;
+    color: white;
+    border: 0.5px solid green;
+    border-radius: 0 0 5px 5px;
+    cursor: pointer;
+}
+
+.btn-vote:active,
+.btn-vote:hover {
+    background-color: yellowgreen;
+    border: 0.5px solid yellowgreen;
+    color: black;
+}
+
+.choose {
+    cursor: default;
+    background-color: yellowgreen;
+    border: 0.5px solid yellowgreen;
+    color: black;
+}
+
+.not-choose {
+    cursor: default;
+    background-color: gray;
+    border: 0.5px solid gray;
+    color: whitesmoke;
+}
+
+.not-choose:active,
+.not-choose:hover {
+    background-color: gray;
+    border: 0.5px solid gray;
+    color: whitesmoke;
+}
+
+.leaderboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    width: 800px;
+}
+
+.leaderboard-cell-user {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    padding: 10px;
+    border: 0.5px solid gray;
+}
+
+.leaderboard-user-avatar-grid {
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.leaderboard-user-avatar {
+    width: 60%;
+    border-radius: 50%;
+    margin-left: 15px;
+    display: flex;
+    text-align: center;
+}
+
+.leaderboard-header {
+    padding: 10px;
+    border: 0.5px solid gray;
+    background-color: whitesmoke;
+    font-weight: 600;
+}
+
+.leaderboard-name {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.leaderboard-user-name {
+    color: gray;
+}
+
+.leaderboard-answer-created {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.5px solid gray;
+}
+
+.nav-container,
+.left-btns,
+.right-btns {
+    display: flex;
+}
+
+.nav-container {
+    justify-content: space-between;
+    align-items: center;
+    width: 1000px;
+    margin-bottom: 20px;
+}
+
+.nav-btn {
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    border-bottom: 1px solid white;
+}
+
+.nav-btn:active,
+.nav-btn:hover {
+    border-bottom: 1px solid black;
+    color: green;
+}
+
+.nav-avatar {
+    padding: 10px 20px;
 }
