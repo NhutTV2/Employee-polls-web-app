@@ -20,7 +20,7 @@ const Nav = (props) => {
           <Link to="/leaderboard" className="nav-btn">
             Leaderboard
           </Link>
-          <Link to="/new" className="nav-btn">
+          <Link to="/add" className="nav-btn">
             New
           </Link>
         </div>

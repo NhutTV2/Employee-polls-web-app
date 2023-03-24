@@ -47,13 +47,9 @@ const Leaderboard = (props) => {
     }
 
     leaderboards.push(leaderboard);
-    leaderboards.sort((a, b) => {
-      if (b.countAnswer > a.countAnswer) return 1;
-      if (b.countAnswer < a.countAnswer) return -1;
-      if (b.countCreate > a.countCreate) return 1;
-      if (b.countCreate < a.countCreate) return -1;
-      return 0;
-    });
+    leaderboards.sort(
+      (a, b) => b.countAnswer + b.countCreate - (a.countAnswer + a.countCreate)
+    );
   }
 
   return (

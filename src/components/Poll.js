@@ -8,7 +8,7 @@ const Poll = (props) => {
   const navigate = useNavigate();
   const toPollDetail = (e, id) => {
     e.preventDefault();
-    navigate(`/poll/${id}`);
+    navigate(`/question/${id}`);
   };
 
   return (
