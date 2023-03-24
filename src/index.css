@@ -48,17 +48,25 @@
     border-radius: 0 0 5px 5px;
 }
 
-.poll-header {
-    width: 850px;
-    grid-column-start: 1;
-    grid-column-end: 5;
+.grid-header-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     border: 1px solid gray;
     border-bottom: none;
+    border-radius: 5px 5px 0 0;
+}
+
+.poll-header {
+    width: 425px;
     text-align: center;
     padding: 10px 0;
     font-size: 18px;
     font-weight: 700;
-    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+}
+
+.active-header {
+    color: brown;
 }
 
 .poll-item {

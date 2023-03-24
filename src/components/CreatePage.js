@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { handleCreatePoll } from '../actions/polls';
 import { connect } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 
 const CreatePage = (props) => {
   const [optionOne, setOptionOne] = useState('');
   const [optionTwo, setOptionTwo] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
 
   if (
     props.authedUser === undefined ||
@@ -16,7 +17,9 @@ const CreatePage = (props) => {
     return (
       <div className="container">
         <h3>You must login first.</h3>
-        <Link to="/login">Back to login page</Link>
+        <Link state={{ path: location.pathname }} to="/login">
+          Back to login page
+        </Link>
       </div>
     );
   }

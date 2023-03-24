@@ -30,7 +30,7 @@ let polls = {
     author: 'sarah_edo',
     timestamp: 1679452943029,
     answers: [
-      { choose: 1, user: 'tylermcginnis' },
+      { choose: 2, user: 'tylermcginnis' },
       { choose: 1, user: 'dan_abramov' },
     ],
   },
@@ -42,7 +42,7 @@ let polls = {
     timestamp: 1518122597860,
     answers: [
       { choose: 1, user: 'sarah_edo' },
-      { choose: 1, user: 'tylermcginnis' },
+      { choose: 2, user: 'tylermcginnis' },
     ],
   },
   hbsc73kzqi75rg7v1e0i6a: {
@@ -64,7 +64,8 @@ let polls = {
     timestamp: 1518122597860,
     answers: [
       { choose: 1, user: 'dan_abramov' },
-      { choose: 1, user: 'tylermcginnis' },
+      { choose: 2, user: 'tylermcginnis' },
+      { choose: 2, user: 'sarah_edo' },
     ],
   },
   nnvkjqoevs8t02lzcc0ky: {
@@ -74,8 +75,8 @@ let polls = {
     author: 'sarah_edo',
     timestamp: 1679485709364,
     answers: [
-      { choose: 1, user: 'dan_abramov' },
-      { choose: 1, user: 'tylermcginnis' },
+      { choose: 2, user: 'dan_abramov' },
+      { choose: 2, user: 'tylermcginnis' },
     ],
   },
 };

@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate, useLocation } from 'react-router-dom';
 import { handleLogin } from '../actions/authedUser';
 import logo from '../images/login-background.png';
 
 const LoginPage = (props) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   if (props.authedUser && props.authedUser.id) {
     navigate('/home');
@@ -40,7 +40,7 @@ const LoginPage = (props) => {
     setLoginFail(false);
     setUsername('');
     setPassword('');
-    navigate('/home');
+    navigate(location.state?.path || '/home');
   };
 
   return (

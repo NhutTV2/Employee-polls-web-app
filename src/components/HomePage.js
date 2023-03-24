@@ -1,9 +1,13 @@
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
 import Poll from './Poll';
 
 const HomePage = (props) => {
+  const location = useLocation();
+  const [pollType, setPollType] = useState('new');
+
   if (
     props.authedUser === undefined ||
     props.authedUser === null ||
@@ -12,26 +16,42 @@ const HomePage = (props) => {
     return (
       <div className="container">
         <h3>You must login first.</h3>
-        <Link to="/login">Back to login page</Link>
+        <Link state={{ path: location.pathname }} to="/login">
+          Back to login page
+        </Link>
       </div>
     );
   }
 
+  const togglePoll = (type) => {
+    setPollType(type);
+  };
+
   return (
     <div className="container">
-      <div className="poll-header">New Polls</div>
-      <div className="grid-container">
-        {props.inprogressPolls.map((id) => {
-          return <Poll key={id} id={id} />;
-        })}
+      <div className="grid-header-container">
+        <div
+          onClick={() => togglePoll('new')}
+          className={
+            pollType === 'new' ? 'poll-header active-header' : 'poll-header'
+          }
+        >
+          New Polls
+        </div>
+        <div
+          onClick={() => togglePoll('done')}
+          className={
+            pollType === 'done' ? 'poll-header active-header' : 'poll-header'
+          }
+        >
+          Done Polls
+        </div>
       </div>
-      <br />
-      <br />
-      <div className="poll-header">Done Polls</div>
+
       <div className="grid-container">
-        {props.donePollIds.map((id) => {
-          return <Poll key={id} id={id} />;
-        })}
+        {pollType === 'new'
+          ? props.newPollsIds.map((id) => <Poll key={id} id={id} />)
+          : props.donePollsIds.map((id) => <Poll key={id} id={id} />)}
       </div>
     </div>
   );
@@ -41,7 +61,7 @@ const mapStateToProps = ({ authedUser, polls }) => {
   if (authedUser === null) return { authedUser: null };
 
   let donePolls = [];
-  let inprogressPolls = [];
+  let newPolls = [];
 
   Object.values(polls).forEach((poll) => {
     if (
@@ -49,16 +69,16 @@ const mapStateToProps = ({ authedUser, polls }) => {
     ) {
       donePolls.push(poll.id);
     } else {
-      inprogressPolls.push(poll.id);
+      newPolls.push(poll.id);
     }
   });
 
   return {
     authedUser,
-    donePollIds: donePolls.sort(
+    donePollsIds: donePolls.sort(
       (a, b) => polls[b].timestamp - polls[a].timestamp
     ),
-    inprogressPolls: inprogressPolls.sort(
+    newPollsIds: newPolls.sort(
       (a, b) => polls[b].timestamp - polls[a].timestamp
     ),
   };

@@ -13,8 +13,11 @@ const withRouter = (Component) => {
 };
 
 const PollPage = (props) => {
+  const location = useLocation();
   const [answer, setAnswer] = useState(
-    props.poll.answers.find((answer) => answer.user === props.authedUser.id)
+    props.poll === undefined
+      ? null
+      : props.poll.answers.find((answer) => answer.user === props.authedUser.id)
   );
 
   if (
@@ -25,13 +28,20 @@ const PollPage = (props) => {
     return (
       <div className="container">
         <h3>You must login first.</h3>
-        <Link to="/login">Back to login page</Link>
+        <Link state={{ path: location.pathname }} to="/login">
+          Back to login page
+        </Link>
       </div>
     );
   }
 
   if (!props.poll) {
-    return <p>This poll doesn't exist</p>;
+    return (
+      <div className="container">
+        <p>This poll doesn't exist</p>
+        <Link to="/home">Back to home page</Link>
+      </div>
+    );
   }
 
   const handleChoose = (e, choose) => {
@@ -41,14 +51,30 @@ const PollPage = (props) => {
     setAnswer(newAnswer);
   };
 
+  const getVoteInformation = (answers, choose) => {
+    const chooseCount = answers.filter(
+      (answer) => answer.choose === choose
+    ).length;
+    const totalVote = answers.length;
+    return `${chooseCount} people (${
+      totalVote !== 0 ? Math.round((chooseCount / totalVote) * 100) : 0
+    }%) voted`;
+  };
+
   return (
     <div className="container">
       <h2>Poll by {props.user.name}</h2>
       <img src={props.user.avatarURL} alt="avatar" className="avatar" />
       <h3>Would You Rather</h3>
       <div className="questions-container">
-        <div className="question-content">{props.poll.firstQuestion}</div>
-        <div className="question-content">{props.poll.secondQuestion}</div>
+        <div className="question-content">
+          {props.poll.firstQuestion}
+          <p>{getVoteInformation(props.poll.answers, 1)}</p>
+        </div>
+        <div className="question-content">
+          {props.poll.secondQuestion}
+          <p>{getVoteInformation(props.poll.answers, 2)}</p>
+        </div>
         {answer === undefined && (
           <div>
             <button
@@ -102,7 +128,7 @@ const mapStateToProps = ({ authedUser, polls, users }, props) => {
   if (authedUser === null) return { authedUser };
   const { id } = props.router.params;
   const poll = { ...polls }[id];
-  if (poll === undefined) return { poll };
+  if (poll === undefined) return { authedUser, poll };
   const user = { ...users }[poll.author];
   return { id, authedUser, poll, user };
 };

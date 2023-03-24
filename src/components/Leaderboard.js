@@ -1,7 +1,9 @@
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Leaderboard = (props) => {
+  const location = useLocation();
+
   if (
     props.authedUser === undefined ||
     props.authedUser === null ||
@@ -10,7 +12,9 @@ const Leaderboard = (props) => {
     return (
       <div className="container">
         <h3>You must login first.</h3>
-        <Link to="/login">Back to login page</Link>
+        <Link state={{ path: location.pathname }} to="/login">
+          Back to login page
+        </Link>
       </div>
     );
   }
@@ -43,6 +47,13 @@ const Leaderboard = (props) => {
     }
 
     leaderboards.push(leaderboard);
+    leaderboards.sort((a, b) => {
+      if (b.countAnswer > a.countAnswer) return 1;
+      if (b.countAnswer < a.countAnswer) return -1;
+      if (b.countCreate > a.countCreate) return 1;
+      if (b.countCreate < a.countCreate) return -1;
+      return 0;
+    });
   }
 
   return (
@@ -77,10 +88,11 @@ const Leaderboard = (props) => {
   );
 };
 
-const mapStateToProps = ({ users, polls, authedUser }) => ({
+const mapStateToProps = ({ users, polls, authedUser, requestedPage }) => ({
   users,
   polls,
   authedUser,
+  requestedPage,
 });
 
 export default connect(mapStateToProps)(Leaderboard);
